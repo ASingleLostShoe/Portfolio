@@ -32,16 +32,6 @@ Personal portfolio website showcasing geospatial technology consulting work. Thi
 └── images/             # Project thumbnails and assets
 ```
 
-## Local Development
-
-Open `index.html` in a browser, or run a local server:
-
-```bash
-python -m http.server 8000
-```
-
-Then visit `http://localhost:8000`
-
 ## License
 
 All rights reserved.
