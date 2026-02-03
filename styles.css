@@ -519,3 +519,247 @@ body {
         height: 200px;
     }
 }
+
+/* =================================
+   PROJECT DETAIL PAGE STYLES
+   ================================= */
+
+/* Project card links */
+a.project-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Project Hero */
+.project-hero {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    max-height: 600px;
+    margin-top: 60px;
+}
+
+.project-hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.project-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-hero-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 3rem 2rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+}
+
+.project-hero-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-block;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 0.85rem;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: white;
+}
+
+.project-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.project-meta {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.8);
+}
+
+/* Project Main Content */
+.project-main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.project-section {
+    margin-bottom: 3rem;
+}
+
+.project-section h2 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    color: var(--text-dark);
+}
+
+.project-section p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+    margin-bottom: 1.5rem;
+}
+
+/* Embedded Content (Story Maps) */
+.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.embed-fallback {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.embed-fallback a {
+    color: var(--text-medium);
+}
+
+/* Project Gallery */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.02);
+}
+
+.gallery-placeholder {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Project Links */
+.links-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Project Navigation (Prev/Next) */
+.project-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.project-nav-link {
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: color 0.2s;
+}
+
+.project-nav-link:hover {
+    color: var(--text-medium);
+}
+
+.project-nav-link.next {
+    text-align: right;
+}
+
+.project-nav-link .nav-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
+}
+
+.project-nav-link .nav-title {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Responsive adjustments for project pages */
+@media (max-width: 768px) {
+    .project-hero {
+        height: 50vh;
+        min-height: 300px;
+    }
+
+    .project-hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .project-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .project-main {
+        padding: 2rem 1.5rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-nav {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .project-nav-link.next {
+        text-align: left;
+    }
+
+    .links-grid {
+        flex-direction: column;
+    }
+}

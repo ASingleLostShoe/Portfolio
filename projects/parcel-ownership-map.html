@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Parcel Ownership Map - Pat Hall</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">Pat Hall</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">about</a></li>
+                <li><a href="../index.html#experience">experience</a></li>
+                <li><a href="../index.html#portfolio">projects</a></li>
+                <li><a href="../index.html#contact">contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="project-hero-image">
+            <img src="../images/parcel-map.jpg" alt="Interactive Parcel Ownership Map">
+        </div>
+        <div class="project-hero-content">
+            <div class="project-hero-inner">
+                <a href="../index.html#portfolio" class="back-link">&larr; back to projects</a>
+                <h1>Interactive Parcel Ownership Map</h1>
+                <div class="project-meta">
+                    <span>USFS / ArcGIS Online</span>
+                    <span>February 2024</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-main">
+        <section class="project-section">
+            <h2>Overview</h2>
+            <p>In 2023, I collaborated with my team at the University of Colorado GAMLab to deliver a prototype interactive map experience. Whenever the Forest Service does work on National Forest Land which may impact non-government landholders, they are required to notify those land-holders of the work being done.</p>
+            <p>Unfortunately, this is easier to say than to do. While parcel ownership data is technically public information, it is managed at the county level in most states. This means that the data is managed in a variety of ways that don't match up perfectly with each other, and that in many cases this data needs to be collected from individual county assessors offices or third-party data aggregators.</p>
+            <p>The goal of our project was to create an easy-to-use application for identifying and reaching out to property owners around National Forest land. For this project, we delivered a spatial database of Parcel Ownership and contact information for the states of South Carolina, Florida, and Puerto Rico.</p>
+        </section>
+
+        <section class="project-section">
+            <h2>My Role</h2>
+            <p>My portion of this project was data acquisition and preparation. I was responsible for the state of South Carolina. Once relevant parcels in all counties and states were collected, it was my job to clean the data sets and merge them into a cohesive single table which my colleague Reese Beeler could build the AGOL experience around.</p>
+        </section>
+
+        <section class="project-section">
+            <h2>Deliverables</h2>
+            <p>Once collected, the data was visualized using an interactive map experience developed and hosted in ArcGIS Online (AGOL). The interactive map experience allows the USFS to highlight areas around national forest land and print a list of affected landowners with their mailing addresses for contact.</p>
+        </section>
+
+        <section class="project-section">
+            <h2>Gallery</h2>
+            <p class="gallery-placeholder">Additional project images coming soon.</p>
+        </section>
+
+        <nav class="project-nav">
+            <a href="gamlab-project-management.html" class="project-nav-link prev">
+                <span class="nav-label">previous</span>
+                <span class="nav-title">GAMLab Project Management Platform</span>
+            </a>
+            <a href="drought-putnam-county.html" class="project-nav-link next">
+                <span class="nav-label">next</span>
+                <span class="nav-title">Drought in Putnam County, WV</span>
+            </a>
+        </nav>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Pat Hall</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Roofs Multispectral Analysis - Pat Hall</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">Pat Hall</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">about</a></li>
+                <li><a href="../index.html#experience">experience</a></li>
+                <li><a href="../index.html#portfolio">projects</a></li>
+                <li><a href="../index.html#contact">contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="project-hero-image">
+            <img src="../images/cool-roofs.jpg" alt="Cool Roofs Multispectral Analysis">
+        </div>
+        <div class="project-hero-content">
+            <div class="project-hero-inner">
+                <a href="../index.html#portfolio" class="back-link">&larr; back to projects</a>
+                <h1>Cool Roofs Multispectral Analysis</h1>
+                <div class="project-meta">
+                    <span>Python / Remote Sensing</span>
+                    <span>July 2023</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-main">
+        <section class="project-section">
+            <h2>Overview</h2>
+            <p>The urban heat island effect is a phenomenon wherein it tends to be hotter in cities than outside them. One of the reasons for this is the built environment and infrastructure found in cities, such as roads, buildings, and other infrastructure. Black surfaces tend to absorb light from the sun and radiate it back out in the form of infrared radiation, aka heat, whereas light surfaces tend to reflect light back out of the atmosphere. The measure of reflectance is called albedo and can be measured from specific kinds of imagery.</p>
+        </section>
+
+        <section class="project-section">
+            <h2>My Role</h2>
+            <p>My role in the Cool Roofs project, a research collaboration between The University of Colorado Denver and The Tokyo University of Science (TUS) was to take albedo formulas developed by the TUS team and develop Python script around them to produce Albedo-value raster products from Remotely-Sensed Raster Datasets.</p>
+        </section>
+
+        <section class="project-section">
+            <h2>Technical Details</h2>
+            <p>The Python scripts in the CoolRoofs GitHub repository convert WorldView-3 (WV3) 16-band images and Red Edge 5-band drone imagery into Albedo Value rasters using a formula derived by the team at TUS. Additionally, there is a function to Downscale rasters from a high-resolution raster to a low-resolution raster. This allows for comparing Albedo values obtained from the drone images versus those obtained from the satellite images.</p>
+            <p>This is part of ongoing research into developing a better methodology for deriving albedo from lower spectral resolution (and often cheaper) images like those taken by drones.</p>
+        </section>
+
+        <section class="project-section">
+            <h2>Gallery</h2>
+            <p class="gallery-placeholder">Additional project images coming soon.</p>
+        </section>
+
+        <section class="project-section">
+            <h2>Links & Resources</h2>
+            <div class="links-grid">
+                <a href="https://github.com/ASingleLostShoe/CoolRoofs" target="_blank" class="btn btn-primary">view on github</a>
+            </div>
+        </section>
+
+        <nav class="project-nav">
+            <a href="delivery-network-analysis.html" class="project-nav-link prev">
+                <span class="nav-label">previous</span>
+                <span class="nav-title">Last-mile Delivery Network Analysis</span>
+            </a>
+            <a href="lidar-canopy-height.html" class="project-nav-link next">
+                <span class="nav-label">next</span>
+                <span class="nav-title">USFS LiDAR Canopy Height Models</span>
+            </a>
+        </nav>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Pat Hall</p>
+    </footer>
+</body>
+</html>
