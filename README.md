@@ -1,6 +1,6 @@
 # Pat Hall - Portfolio
 
-Personal portfolio website showcasing geospatial technology consulting work. This site serves as a professional portfolio for Pat Hall, highlighting projects in spatial data systems, raster analysis, and GIS consulting. It features work completed for clients including the U.S. Forest Service, academic institutions, and municipal governments. I attest that all work included in this portfolio is my own original work, or work I made significant contributions to.
+Personal portfolio website showcasing geospatial technology consulting work. This site serves as a professional portfolio for Pat Hall, highlighting projects in spatial data systems, raster analysis, and GIS consulting. It features work completed for clients including the U.S. Forest Service, academic institutions, and municipal governments. I attest that all work included in this portfolio is my own original work, or work I made significant contributions to. This portfolio website was built and published with the assistance of [Claude.ai](https://claude.ai).
 
 **Live site:** [azmth.io](https://azmth.io)
 
