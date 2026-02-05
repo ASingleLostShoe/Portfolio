@@ -55,8 +55,30 @@
 
         <section class="project-section">
             <h2>Gallery</h2>
-            <p class="gallery-placeholder">Additional project images coming soon.</p>
+            <div class="gallery-grid">
+                <img src="../assets/parcel-ownership-map/gallery/Feb%2027%20Screenshot%20from%20Portfolio.png" alt="Parcel Ownership Map Screenshot" data-caption="View of all parcels adjacent to National Forest Land in the state of Florida.">
+                <img src="../assets/parcel-ownership-map/gallery/Feb%2027%20Screenshot%20from%20Portfolio%20(1).png" alt="Parcel Ownership Map Screenshot" data-caption="View of parcels adjacent to Apalachicola National Forest in Florida. The detail box shows attributes that are visible when a user clicks on a specific parcel.">
+            </div>
         </section>
+
+        <section class="project-section">
+            <h2>Report</h2>
+            <p><button class="download-link" id="preview-btn">View Project Report (PDF)</button></p>
+        </section>
+
+        <!-- PDF Preview Modal -->
+        <div class="pdf-modal" id="pdf-modal">
+            <div class="pdf-modal-content">
+                <div class="pdf-modal-header">
+                    <span>USFS Project Report</span>
+                    <div class="pdf-modal-actions">
+                        <a href="../assets/parcel-ownership-map/USFS%20Project%20Report.pdf" class="pdf-download-btn" download>Download</a>
+                        <button class="pdf-close-btn" id="pdf-close">&times;</button>
+                    </div>
+                </div>
+                <iframe src="" id="pdf-iframe" class="pdf-iframe"></iframe>
+            </div>
+        </div>
 
         <nav class="project-nav">
             <a href="gamlab-project-management.html" class="project-nav-link prev">
@@ -73,5 +95,107 @@
     <footer class="footer">
         <p>&copy; 2025 Pat Hall</p>
     </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous">&larr;</button>
+        <button class="lightbox-next" aria-label="Next">&rarr;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        const galleryImages = document.querySelectorAll('.gallery-grid img');
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            lightboxImg.src = galleryImages[currentIndex].src;
+            lightboxImg.alt = galleryImages[currentIndex].alt;
+            lightboxCaption.textContent = galleryImages[currentIndex].dataset.caption || '';
+            lightboxCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateLightbox();
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % galleryImages.length;
+            updateLightbox();
+        }
+
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => openLightbox(index));
+        });
+
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        document.querySelector('.lightbox-prev').addEventListener('click', prevImage);
+        document.querySelector('.lightbox-next').addEventListener('click', nextImage);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'ArrowRight') nextImage();
+        });
+
+        // PDF Preview
+        const pdfModal = document.getElementById('pdf-modal');
+        const pdfIframe = document.getElementById('pdf-iframe');
+        const pdfPath = '../assets/parcel-ownership-map/USFS%20Project%20Report.pdf';
+
+        document.getElementById('preview-btn').addEventListener('click', () => {
+            pdfIframe.src = pdfPath;
+            pdfModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        document.getElementById('pdf-close').addEventListener('click', () => {
+            pdfModal.classList.remove('active');
+            pdfIframe.src = '';
+            document.body.style.overflow = '';
+        });
+
+        pdfModal.addEventListener('click', (e) => {
+            if (e.target === pdfModal) {
+                pdfModal.classList.remove('active');
+                pdfIframe.src = '';
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && pdfModal.classList.contains('active')) {
+                pdfModal.classList.remove('active');
+                pdfIframe.src = '';
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
 </body>
 </html>
