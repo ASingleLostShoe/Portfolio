@@ -4,3 +4,4 @@
 !assets/**/*.pdf
 portfolio_text.txt
 CLAUDE.md
+.claude/
