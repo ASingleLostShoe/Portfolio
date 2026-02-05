@@ -1,5 +1,6 @@
 .DS_Store
 .Rhistory
 *.pdf
+!assets/**/*.pdf
 portfolio_text.txt
 CLAUDE.md
