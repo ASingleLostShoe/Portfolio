@@ -22,7 +22,7 @@
 
     <header class="project-hero">
         <div class="project-hero-image">
-            <img src="../images/tableau.jpg" alt="Last-mile Delivery Visualizations">
+            <img src="../assets/delivery-visualizations/courier-survey/page-3.png" alt="Last-mile Delivery Visualizations">
         </div>
         <div class="project-hero-content">
             <div class="project-hero-inner">
@@ -59,9 +59,90 @@
         </section>
 
         <section class="project-section">
-            <h2>Gallery</h2>
-            <p class="gallery-placeholder">Tableau dashboard screenshots coming soon.</p>
+            <h2>Courier Survey</h2>
+            <div class="gallery-grid" data-gallery="courier">
+                <img src="../assets/delivery-visualizations/courier-survey/page-1.png" alt="Courier Survey - Page 1">
+                <img src="../assets/delivery-visualizations/courier-survey/page-2.png" alt="Courier Survey - Page 2">
+                <img src="../assets/delivery-visualizations/courier-survey/page-3.png" alt="Courier Survey - Page 3">
+                <img src="../assets/delivery-visualizations/courier-survey/page-4.png" alt="Courier Survey - Page 4">
+                <img src="../assets/delivery-visualizations/courier-survey/page-5.png" alt="Courier Survey - Page 5">
+                <img src="../assets/delivery-visualizations/courier-survey/page-6.png" alt="Courier Survey - Page 6">
+                <img src="../assets/delivery-visualizations/courier-survey/page-7.png" alt="Courier Survey - Page 7">
+            </div>
         </section>
+
+        <section class="project-section">
+            <h2>Customer Survey</h2>
+            <div class="gallery-grid" data-gallery="customer">
+                <img src="../assets/delivery-visualizations/customer-survey/page-01.png" alt="Customer Survey - Page 1">
+                <img src="../assets/delivery-visualizations/customer-survey/page-02.png" alt="Customer Survey - Page 2">
+                <img src="../assets/delivery-visualizations/customer-survey/page-03.png" alt="Customer Survey - Page 3">
+                <img src="../assets/delivery-visualizations/customer-survey/page-04.png" alt="Customer Survey - Page 4">
+                <img src="../assets/delivery-visualizations/customer-survey/page-05.png" alt="Customer Survey - Page 5">
+                <img src="../assets/delivery-visualizations/customer-survey/page-06.png" alt="Customer Survey - Page 6">
+                <img src="../assets/delivery-visualizations/customer-survey/page-07.png" alt="Customer Survey - Page 7">
+                <img src="../assets/delivery-visualizations/customer-survey/page-08.png" alt="Customer Survey - Page 8">
+                <img src="../assets/delivery-visualizations/customer-survey/page-09.png" alt="Customer Survey - Page 9">
+                <img src="../assets/delivery-visualizations/customer-survey/page-10.png" alt="Customer Survey - Page 10">
+            </div>
+        </section>
+
+        <section class="project-section">
+            <h2>Restaurant Survey</h2>
+            <div class="gallery-grid" data-gallery="restaurant">
+                <img src="../assets/delivery-visualizations/restaurant-survey/page-1.png" alt="Restaurant Survey - Page 1">
+                <img src="../assets/delivery-visualizations/restaurant-survey/page-2.png" alt="Restaurant Survey - Page 2">
+                <img src="../assets/delivery-visualizations/restaurant-survey/page-3.png" alt="Restaurant Survey - Page 3">
+                <img src="../assets/delivery-visualizations/restaurant-survey/page-4.png" alt="Restaurant Survey - Page 4">
+            </div>
+        </section>
+
+        <section class="project-section">
+            <h2>Full Presentations</h2>
+            <p><button class="download-link" id="courier-preview-btn">Courier Survey (PDF)</button></p>
+            <p><button class="download-link" id="customer-preview-btn">Customer Survey (PDF)</button></p>
+            <p><button class="download-link" id="restaurant-preview-btn">Restaurant Survey (PDF)</button></p>
+        </section>
+
+        <!-- PDF Preview Modals -->
+        <div class="pdf-modal" id="courier-modal">
+            <div class="pdf-modal-content">
+                <div class="pdf-modal-header">
+                    <span>Last-mile Delivery Driver Survey</span>
+                    <div class="pdf-modal-actions">
+                        <a href="../assets/delivery-visualizations/Last-mile%20Delivery%20Driver%20Survey.pdf" class="pdf-download-btn" download>Download</a>
+                        <button class="pdf-close-btn" data-modal="courier-modal">&times;</button>
+                    </div>
+                </div>
+                <iframe src="" class="pdf-iframe"></iframe>
+            </div>
+        </div>
+
+        <div class="pdf-modal" id="customer-modal">
+            <div class="pdf-modal-content">
+                <div class="pdf-modal-header">
+                    <span>Last-mile Delivery Customer Analysis</span>
+                    <div class="pdf-modal-actions">
+                        <a href="../assets/delivery-visualizations/Last-mile%20Delivery%20Customer%20Analysis%20v1.pdf" class="pdf-download-btn" download>Download</a>
+                        <button class="pdf-close-btn" data-modal="customer-modal">&times;</button>
+                    </div>
+                </div>
+                <iframe src="" class="pdf-iframe"></iframe>
+            </div>
+        </div>
+
+        <div class="pdf-modal" id="restaurant-modal">
+            <div class="pdf-modal-content">
+                <div class="pdf-modal-header">
+                    <span>Last-mile Delivery Restaurant Analysis</span>
+                    <div class="pdf-modal-actions">
+                        <a href="../assets/delivery-visualizations/Last-mile%20Delivery%20Restaurant%20Analysis.pdf" class="pdf-download-btn" download>Download</a>
+                        <button class="pdf-close-btn" data-modal="restaurant-modal">&times;</button>
+                    </div>
+                </div>
+                <iframe src="" class="pdf-iframe"></iframe>
+            </div>
+        </div>
 
         <nav class="project-nav">
             <a href="wheat-ridge-infrastructure.html" class="project-nav-link prev">
@@ -78,5 +159,124 @@
     <footer class="footer">
         <p>&copy; 2025 Pat Hall</p>
     </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous">&larr;</button>
+        <button class="lightbox-next" aria-label="Next">&rarr;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <script>
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        let currentImages = [];
+        let currentIndex = 0;
+
+        function openLightbox(images, index) {
+            currentImages = images;
+            currentIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            lightboxImg.src = currentImages[currentIndex].src;
+            lightboxImg.alt = currentImages[currentIndex].alt;
+            lightboxCaption.textContent = currentImages[currentIndex].dataset.caption || '';
+            lightboxCounter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+            updateLightbox();
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % currentImages.length;
+            updateLightbox();
+        }
+
+        document.querySelectorAll('.gallery-grid').forEach(grid => {
+            const images = Array.from(grid.querySelectorAll('img'));
+            images.forEach((img, index) => {
+                img.addEventListener('click', () => openLightbox(images, index));
+            });
+        });
+
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        document.querySelector('.lightbox-prev').addEventListener('click', prevImage);
+        document.querySelector('.lightbox-next').addEventListener('click', nextImage);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'ArrowRight') nextImage();
+        });
+
+        // PDF Modals
+        const pdfConfigs = [
+            { btn: 'courier-preview-btn', modal: 'courier-modal', path: '../assets/delivery-visualizations/Last-mile%20Delivery%20Driver%20Survey.pdf' },
+            { btn: 'customer-preview-btn', modal: 'customer-modal', path: '../assets/delivery-visualizations/Last-mile%20Delivery%20Customer%20Analysis%20v1.pdf' },
+            { btn: 'restaurant-preview-btn', modal: 'restaurant-modal', path: '../assets/delivery-visualizations/Last-mile%20Delivery%20Restaurant%20Analysis.pdf' }
+        ];
+
+        pdfConfigs.forEach(({ btn, modal, path }) => {
+            const modalEl = document.getElementById(modal);
+            const iframe = modalEl.querySelector('.pdf-iframe');
+
+            document.getElementById(btn).addEventListener('click', () => {
+                iframe.src = path;
+                modalEl.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            modalEl.querySelector('.pdf-close-btn').addEventListener('click', () => {
+                modalEl.classList.remove('active');
+                iframe.src = '';
+                document.body.style.overflow = '';
+            });
+
+            modalEl.addEventListener('click', (e) => {
+                if (e.target === modalEl) {
+                    modalEl.classList.remove('active');
+                    iframe.src = '';
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                pdfConfigs.forEach(({ modal }) => {
+                    const modalEl = document.getElementById(modal);
+                    if (modalEl.classList.contains('active')) {
+                        modalEl.classList.remove('active');
+                        modalEl.querySelector('.pdf-iframe').src = '';
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
