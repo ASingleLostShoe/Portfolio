@@ -6,6 +6,13 @@
     <title>GAMLab Project Management Platform - Pat Hall</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        /* Override gallery styling to show full images */
+        .gallery-grid img {
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -65,7 +72,19 @@
 
         <section class="project-section">
             <h2>Gallery</h2>
-            <p class="gallery-placeholder">Platform screenshots coming soon.</p>
+            <div class="gallery-grid">
+                <img src="../assets/gamlab-project-management/gallery/Mar 3 Screenshot from Portfolio.png" alt="GAMLab Platform Overview" data-caption="Main project management dashboard showing active projects and team overview.">
+                <img src="../assets/gamlab-project-management/gallery/Mar 3 Screenshot from Portfolio (1).png" alt="Project Tracking Interface" data-caption="Detailed project tracking interface with automated status updates and progress indicators.">
+                <img src="../assets/gamlab-project-management/gallery/Mar 3 Screenshot from Portfolio (2).png" alt="Hour Logging System" data-caption="Hour logging system tied to specific projects for accurate time tracking and billing.">
+                <img src="../assets/gamlab-project-management/gallery/Mar 3 Screenshot from Coda.png" alt="Backend Data Tables" data-caption="Relational data tables backend storing project information, similar to MS Access structure.">
+            </div>
+        </section>
+
+        <section class="project-section">
+            <h2>Links & Resources</h2>
+            <div class="links-grid">
+                <a href="https://coda.io/d/_dRnWfS4hceC/Team-Page_sub1Cjrg" target="_blank" rel="noopener noreferrer" class="btn btn-primary">view demo on coda</a>
+            </div>
         </section>
 
         <nav class="project-nav">
@@ -83,5 +102,74 @@
     <footer class="footer">
         <p>&copy; 2025 Pat Hall</p>
     </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous">&larr;</button>
+        <button class="lightbox-next" aria-label="Next">&rarr;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        const galleryImages = document.querySelectorAll('.gallery-grid img');
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            lightboxImg.src = galleryImages[currentIndex].src;
+            lightboxImg.alt = galleryImages[currentIndex].alt;
+            lightboxCaption.textContent = galleryImages[currentIndex].dataset.caption || '';
+            lightboxCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateLightbox();
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % galleryImages.length;
+            updateLightbox();
+        }
+
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => openLightbox(index));
+        });
+
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        document.querySelector('.lightbox-prev').addEventListener('click', prevImage);
+        document.querySelector('.lightbox-next').addEventListener('click', nextImage);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'ArrowRight') nextImage();
+        });
+    </script>
 </body>
 </html>

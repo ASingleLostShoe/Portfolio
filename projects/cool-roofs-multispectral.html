@@ -6,6 +6,13 @@
     <title>Cool Roofs Multispectral Analysis - Pat Hall</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        /* Override gallery styling to show full images */
+        .gallery-grid img {
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -22,7 +29,7 @@
 
     <header class="project-hero">
         <div class="project-hero-image">
-            <img src="../images/cool-roofs.jpg" alt="Cool Roofs Multispectral Analysis">
+            <img src="../images/cool-roofs.png" alt="Cool Roofs Multispectral Analysis">
         </div>
         <div class="project-hero-content">
             <div class="project-hero-inner">
@@ -55,7 +62,10 @@
 
         <section class="project-section">
             <h2>Gallery</h2>
-            <p class="gallery-placeholder">Additional project images coming soon.</p>
+            <div class="gallery-grid">
+                <img src="../assets/cool-roofs/gallery/Portfolio of Work (1) (2).avif" alt="Cool Roofs Portfolio Sample" data-caption="Sample output showing albedo analysis results from multispectral imagery processing.">
+                <img src="../assets/cool-roofs/gallery/Portfolio Python Multispectral Image Analysis (1).avif" alt="Python Multispectral Analysis" data-caption="Python script workflow for processing WorldView-3 and Red Edge drone imagery into albedo value rasters.">
+            </div>
         </section>
 
         <section class="project-section">
@@ -80,5 +90,74 @@
     <footer class="footer">
         <p>&copy; 2025 Pat Hall</p>
     </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous">&larr;</button>
+        <button class="lightbox-next" aria-label="Next">&rarr;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        const galleryImages = document.querySelectorAll('.gallery-grid img');
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            lightboxImg.src = galleryImages[currentIndex].src;
+            lightboxImg.alt = galleryImages[currentIndex].alt;
+            lightboxCaption.textContent = galleryImages[currentIndex].dataset.caption || '';
+            lightboxCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateLightbox();
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % galleryImages.length;
+            updateLightbox();
+        }
+
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => openLightbox(index));
+        });
+
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        document.querySelector('.lightbox-prev').addEventListener('click', prevImage);
+        document.querySelector('.lightbox-next').addEventListener('click', nextImage);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'ArrowRight') nextImage();
+        });
+    </script>
 </body>
 </html>

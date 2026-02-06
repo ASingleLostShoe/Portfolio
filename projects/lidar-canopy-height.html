@@ -6,6 +6,13 @@
     <title>USFS LiDAR Canopy Height Models - Pat Hall</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        /* Override gallery styling to show full images */
+        .gallery-grid img {
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -61,7 +68,17 @@
 
         <section class="project-section">
             <h2>Gallery</h2>
-            <p class="gallery-placeholder">Additional project images coming soon.</p>
+            <div class="gallery-grid">
+                <img src="../assets/lidar-canopy-height/gallery/Programmatic LiDAR Analysis Portfolio (1).png" alt="LiDAR Analysis Sample" data-caption="Example canopy height model output showing forest structure analysis.">
+                <img src="../assets/lidar-canopy-height/gallery/Programmatic LiDAR Analysis Portfolio (2).jpg" alt="LiDAR Processing Workflow" data-caption="Visualization of the LiDAR processing pipeline using PDAL and Rasterio.">
+                <img src="../assets/lidar-canopy-height/gallery/Programmatic LiDAR Analysis Portfolio (3).jpg" alt="CHM Comparison" data-caption="Comparative analysis of canopy height models generated using different methodologies.">
+            </div>
+        </section>
+
+        <section class="project-section">
+            <h2>Reports</h2>
+            <p><button class="download-link" id="preview-btn">View CHM Comparative Methodology Report (PDF)</button></p>
+            <p><button class="download-link" id="report-preview-btn">View Programmatic LiDAR Analysis Closure Report (PDF)</button></p>
         </section>
 
         <section class="project-section">
@@ -70,6 +87,34 @@
                 <a href="https://github.com/ASingleLostShoe/CanopyModel_PDAL" target="_blank" rel="noopener noreferrer" class="btn btn-primary">view on github</a>
             </div>
         </section>
+
+        <!-- PDF Preview Modal (Methodology Report) -->
+        <div class="pdf-modal" id="pdf-modal">
+            <div class="pdf-modal-content">
+                <div class="pdf-modal-header">
+                    <span>CHM Comparative Methodology Report</span>
+                    <div class="pdf-modal-actions">
+                        <a href="../assets/lidar-canopy-height/CHM Comparative Methodology Report.pdf" class="pdf-download-btn" download>Download</a>
+                        <button class="pdf-close-btn" id="pdf-close">&times;</button>
+                    </div>
+                </div>
+                <iframe src="" id="pdf-iframe" class="pdf-iframe"></iframe>
+            </div>
+        </div>
+
+        <!-- PDF Preview Modal (Closure Report) -->
+        <div class="pdf-modal" id="report-modal">
+            <div class="pdf-modal-content">
+                <div class="pdf-modal-header">
+                    <span>Programmatic LiDAR Analysis Closure Report</span>
+                    <div class="pdf-modal-actions">
+                        <a href="../assets/lidar-canopy-height/Programmatic LiDAR Analysis Closure Report.pdf" class="pdf-download-btn" download>Download</a>
+                        <button class="pdf-close-btn" id="report-close">&times;</button>
+                    </div>
+                </div>
+                <iframe src="" id="report-iframe" class="pdf-iframe"></iframe>
+            </div>
+        </div>
 
         <nav class="project-nav">
             <a href="cool-roofs-multispectral.html" class="project-nav-link prev">
@@ -86,5 +131,140 @@
     <footer class="footer">
         <p>&copy; 2025 Pat Hall</p>
     </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button class="lightbox-prev" aria-label="Previous">&larr;</button>
+        <button class="lightbox-next" aria-label="Next">&rarr;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        const galleryImages = document.querySelectorAll('.gallery-grid img');
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            lightboxImg.src = galleryImages[currentIndex].src;
+            lightboxImg.alt = galleryImages[currentIndex].alt;
+            lightboxCaption.textContent = galleryImages[currentIndex].dataset.caption || '';
+            lightboxCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateLightbox();
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % galleryImages.length;
+            updateLightbox();
+        }
+
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => openLightbox(index));
+        });
+
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        document.querySelector('.lightbox-prev').addEventListener('click', prevImage);
+        document.querySelector('.lightbox-next').addEventListener('click', nextImage);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'ArrowRight') nextImage();
+        });
+
+        // PDF Preview (Methodology Report)
+        const pdfModal = document.getElementById('pdf-modal');
+        const pdfIframe = document.getElementById('pdf-iframe');
+        const pdfPath = '../assets/lidar-canopy-height/CHM Comparative Methodology Report.pdf';
+
+        document.getElementById('preview-btn').addEventListener('click', () => {
+            pdfIframe.src = pdfPath;
+            pdfModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        document.getElementById('pdf-close').addEventListener('click', () => {
+            pdfModal.classList.remove('active');
+            pdfIframe.src = '';
+            document.body.style.overflow = '';
+        });
+
+        pdfModal.addEventListener('click', (e) => {
+            if (e.target === pdfModal) {
+                pdfModal.classList.remove('active');
+                pdfIframe.src = '';
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && pdfModal.classList.contains('active')) {
+                pdfModal.classList.remove('active');
+                pdfIframe.src = '';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Closure Report Preview
+        const reportModal = document.getElementById('report-modal');
+        const reportIframe = document.getElementById('report-iframe');
+        const reportPath = '../assets/lidar-canopy-height/Programmatic LiDAR Analysis Closure Report.pdf';
+
+        document.getElementById('report-preview-btn').addEventListener('click', () => {
+            reportIframe.src = reportPath;
+            reportModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        document.getElementById('report-close').addEventListener('click', () => {
+            reportModal.classList.remove('active');
+            reportIframe.src = '';
+            document.body.style.overflow = '';
+        });
+
+        reportModal.addEventListener('click', (e) => {
+            if (e.target === reportModal) {
+                reportModal.classList.remove('active');
+                reportIframe.src = '';
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && reportModal.classList.contains('active')) {
+                reportModal.classList.remove('active');
+                reportIframe.src = '';
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
 </body>
 </html>
