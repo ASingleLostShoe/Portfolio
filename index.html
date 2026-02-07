@@ -228,20 +228,42 @@
         <p>&copy; 2025 Pat Hall</p>
     </footer>
 
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js" integrity="sha384-DCItTEf8oVIR1/pAghiit/WoXLuaza8jqXRxnegNqyPuyJMN6onGSHZiZvm5/ZM2" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js" integrity="sha384-75EXB1NC3j0kcEPV6zEdcB4KT2LIPfMbWZuxquaBKgr4DT9FOwM3rMB/tuFV73lZ" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha384-e3sbGkYzJZpi7OdZc2eUoj7saI8K/Qbn+kPTdWyUQloiKIc9HRH4RUWFVxTonzTg" crossorigin="anonymous"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const grid = document.querySelector('.project-grid');
-            const cards = document.querySelectorAll('.project-card');
-            const sizes = ['size-small', 'size-small', 'size-small', 'size-medium', 'size-medium', 'size-tall', 'size-wide', 'size-large'];
-            let msnry;
+            var grid = document.querySelector('.project-grid');
+            var cards = document.querySelectorAll('.project-card');
+            var msnry;
 
-            // Randomly assign sizes
-            cards.forEach(function(card) {
-                const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
-                card.classList.add(randomSize);
-            });
+            // Row-packing algorithm: assign 2-col and 3-col widths
+            // that always sum to 6 columns per row, eliminating gaps
+            var patterns = [[2,2,2], [3,3]];
+            var idx = 0;
+            var tallCount = 0;
+
+            while (idx < cards.length) {
+                var remaining = cards.length - idx;
+                // Filter patterns that won't leave exactly 1 card (dead end)
+                var valid = patterns.filter(function(p) {
+                    var after = remaining - p.length;
+                    return p.length <= remaining && (after === 0 || after >= 2);
+                });
+                var pattern = valid[Math.floor(Math.random() * valid.length)];
+
+                for (var i = 0; i < pattern.length; i++) {
+                    var cols = pattern[i];
+                    var makeTall = tallCount < 2 && Math.random() < 0.25;
+                    if (makeTall) tallCount++;
+
+                    if (cols === 2) {
+                        cards[idx].classList.add(makeTall ? 'size-tall' : 'size-medium');
+                    } else {
+                        cards[idx].classList.add(makeTall ? 'size-large' : 'size-wide');
+                    }
+                    idx++;
+                }
+            }
 
             // Initialize Masonry after images load
             imagesLoaded(grid, function() {
@@ -255,7 +277,7 @@
             });
 
             // Re-layout on window resize
-            let resizeTimer;
+            var resizeTimer;
             window.addEventListener('resize', function() {
                 clearTimeout(resizeTimer);
                 resizeTimer = setTimeout(function() {
