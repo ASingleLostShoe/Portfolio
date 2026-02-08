@@ -247,17 +247,15 @@ body {
 }
 
 .project-grid {
-    margin: 0;
-}
-
-.project-grid::after {
-    content: '';
-    display: block;
-    clear: both;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 200px;
+    gap: 10px;
+    grid-auto-flow: dense;
 }
 
 .grid-sizer {
-    width: calc(16.666% - 8.333px);
+    display: none;
 }
 
 .project-card {
@@ -265,29 +263,25 @@ body {
     overflow: hidden;
     cursor: pointer;
     position: relative;
-    margin-bottom: 10px;
 }
 
-/* Size variations - 6 column grid (2-col and 3-col tiles only) */
-/* Heights use tall = 2×short + gutter(10px) so stacked tiles align */
+/* Size variations using CSS Grid spans */
 .project-card.size-medium {
-    width: calc(33.333% - 6.667px);
-    height: 200px;
+    grid-column: span 2;
 }
 
 .project-card.size-tall {
-    width: calc(33.333% - 6.667px);
-    height: 410px;
+    grid-column: span 2;
+    grid-row: span 2;
 }
 
 .project-card.size-wide {
-    width: calc(50% - 5px);
-    height: 200px;
+    grid-column: span 3;
 }
 
 .project-card.size-large {
-    width: calc(50% - 5px);
-    height: 410px;
+    grid-column: span 3;
+    grid-row: span 2;
 }
 
 .project-card:hover .project-image img {
@@ -393,55 +387,52 @@ body {
 
 /* 4 columns */
 @media (max-width: 1400px) {
-    .grid-sizer {
-        width: calc(25% - 7.5px);
+    .project-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 180px;
     }
 
     .project-card.size-medium {
-        width: calc(25% - 7.5px);
-        height: 180px;
+        grid-column: span 1;
     }
 
     .project-card.size-tall {
-        width: calc(25% - 7.5px);
-        height: 370px;
+        grid-column: span 1;
+        grid-row: span 2;
     }
 
     .project-card.size-wide {
-        width: calc(50% - 5px);
-        height: 180px;
+        grid-column: span 2;
     }
 
     .project-card.size-large {
-        width: calc(50% - 5px);
-        height: 370px;
+        grid-column: span 2;
+        grid-row: span 2;
     }
 }
 
 /* 3 columns */
 @media (max-width: 1000px) {
-    .grid-sizer {
-        width: calc(33.333% - 6.667px);
+    .project-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .project-card.size-medium {
-        width: calc(33.333% - 6.667px);
-        height: 180px;
+        grid-column: span 1;
     }
 
     .project-card.size-tall {
-        width: calc(33.333% - 6.667px);
-        height: 370px;
+        grid-column: span 1;
+        grid-row: span 2;
     }
 
     .project-card.size-wide {
-        width: calc(66.667% - 3.333px);
-        height: 180px;
+        grid-column: span 2;
     }
 
     .project-card.size-large {
-        width: calc(66.667% - 3.333px);
-        height: 370px;
+        grid-column: span 2;
+        grid-row: span 2;
     }
 }
 
@@ -468,28 +459,27 @@ body {
         gap: 2rem;
     }
 
-    .grid-sizer {
-        width: calc(50% - 5px);
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 160px;
     }
 
     .project-card.size-medium {
-        width: calc(50% - 5px);
-        height: 160px;
+        grid-column: span 1;
     }
 
     .project-card.size-tall {
-        width: calc(50% - 5px);
-        height: 330px;
+        grid-column: span 1;
+        grid-row: span 2;
     }
 
     .project-card.size-wide {
-        width: 100%;
-        height: 160px;
+        grid-column: span 2;
     }
 
     .project-card.size-large {
-        width: 100%;
-        height: 330px;
+        grid-column: span 2;
+        grid-row: span 2;
     }
 
     .contact-links {
@@ -500,13 +490,17 @@ body {
 
 /* 1 column */
 @media (max-width: 500px) {
-    .grid-sizer,
+    .project-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 200px;
+    }
+
     .project-card.size-medium,
     .project-card.size-tall,
     .project-card.size-wide,
     .project-card.size-large {
-        width: 100%;
-        height: 200px;
+        grid-column: span 1;
+        grid-row: span 1;
     }
 }
 
