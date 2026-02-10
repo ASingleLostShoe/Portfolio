@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building with Claude Code - Pat Hall</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">Pat Hall</a>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">about</a></li>
+                <li><a href="../index.html#experience">experience</a></li>
+                <li><a href="../index.html#portfolio">projects</a></li>
+                <li><a href="../index.html#contact">contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="project-hero">
+        <div class="project-hero-image">
+            <img src="" alt="Building with Claude Code" style="background: linear-gradient(135deg, #f5f5f5, #e0e0e0);">
+        </div>
+        <div class="project-hero-content">
+            <div class="project-hero-inner">
+                <a href="../index.html#portfolio" class="back-link">&larr; back to projects</a>
+                <h1>Building with Claude Code</h1>
+                <div class="project-meta">
+                    <span>AI-Assisted Development</span>
+                    <span>2026</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-main">
+        <section class="project-section">
+            <h2>Overview</h2>
+            <p>This portfolio website was built almost entirely through conversation with Claude Code, Anthropic's AI coding assistant. The project started as a migration from a Coda.io portfolio document into a standalone static website, and evolved into a fully-featured portfolio with 13 individual project pages, interactive galleries, and embedded Story Maps.</p>
+            <p>The design takes inspiration from the <a href="https://www.fieldoperations.net/projects.html" target="_blank" rel="noopener noreferrer">Field Operations</a> website, adopting a minimal white and gray aesthetic with lowercase typography and clean grid layouts. Every line of HTML, CSS, and JavaScript was generated through iterative prompting — describing what I wanted, reviewing the output, and refining through follow-up conversations.</p>
+        </section>
+
+        <section class="project-section">
+            <h2>Technical Details</h2>
+            <ul style="color: var(--text-medium); margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Static HTML/CSS/JS</strong> with zero external library dependencies</li>
+                <li><strong>Dynamic tile system</strong> using CSS Grid with <code>grid-auto-flow: dense</code> and a custom row-packing algorithm that randomizes tile sizes on each page load</li>
+                <li><strong>Responsive breakpoints</strong> scaling from 6 columns on wide screens down to 1 column on mobile</li>
+                <li><strong>13 project detail pages</strong> with lightbox image galleries, PDF preview modals, and ESRI Story Map embeds</li>
+                <li><strong>Hosted on GitHub Pages</strong> with custom domain (pathallis.me) and enforced HTTPS</li>
+                <li><strong>Security hardening</strong> including <code>rel="noopener noreferrer"</code> on external links, iframe sandboxing on Story Map embeds, and PDF metadata stripping</li>
+            </ul>
+        </section>
+
+        <section class="project-section">
+            <h2>Challenges & Iterations</h2>
+            <p>The development process wasn't always linear. Several approaches were tried and either refined or abandoned entirely:</p>
+            <ul style="color: var(--text-medium); margin-left: 1.5rem; line-height: 1.8;">
+                <li><strong>Dark mode</strong> was implemented using <code>prefers-color-scheme</code> but wasn't detecting correctly, so it was reverted to a light-only theme</li>
+                <li><strong>Masonry.js</strong> was initially used for the project grid, but CDN-hosted SRI hashes kept breaking due to floating version ranges — the entire library was replaced with a zero-dependency CSS Grid solution</li>
+                <li><strong>Tile sizing</strong> evolved from static assignments to a row-packing algorithm that ensures column spans always sum to 6, with randomized tall tiles for visual variety</li>
+                <li><strong>Security concerns</strong> required purging CLAUDE.md from git history using git-filter-repo and stripping local file paths from PDF metadata with exiftool</li>
+            </ul>
+        </section>
+
+        <section class="project-section">
+            <h2>Links & Resources</h2>
+            <div class="links-grid">
+                <a href="https://github.com/ASingleLostShoe/Portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-primary">view on github</a>
+            </div>
+        </section>
+
+        <nav class="project-nav">
+            <a href="gamlab-project-management.html" class="project-nav-link prev">
+                <span class="nav-label">previous</span>
+                <span class="nav-title">GAMLab Project Management Platform</span>
+            </a>
+            <a href="parcel-ownership-map.html" class="project-nav-link next">
+                <span class="nav-label">next</span>
+                <span class="nav-title">Interactive Parcel Ownership Map</span>
+            </a>
+        </nav>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Pat Hall</p>
+    </footer>
+</body>
+</html>
